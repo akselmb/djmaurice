@@ -1,0 +1,207 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import red from '@material-ui/core/colors/red';
+import axios from 'axios';
+
+const styles = theme => ({
+  root: {
+  	backgroundColor: "black",
+    flexGrow: 1,
+    padding: 0,
+    height: "100%",
+    position: "relative",
+    color: "white"
+  },
+  text: {
+    textAlign: "center",
+    background: "transparent",
+    boxShadow: 'none',
+    color: 'black',
+    variant: "h2",
+    padding: "70px 0 70px"
+  },
+  headline: {
+    textAlign: "center",
+    background: "transparent",
+    boxShadow: 'none',
+    color: 'white',
+  },
+  messageName: {
+    textColor: "white"
+  },
+  messageEmail: {
+
+  },
+  messageInput: {
+
+  },
+  sendButton: {
+    color: "black",
+    background: "white",
+    marginLeft: "auto",
+    display: "block",
+    ':hover': {
+      background: "white"
+    }
+  },
+  multilineColor: {
+    color:'white'
+  },
+  notchedOutline: {
+    borderWidth: "1px",
+    borderColor: "#f44336 !important"
+  }
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: red,
+    secondary: red
+  },
+  typography: { useNextVariants: true },
+});
+
+class Kontakt extends React.Component {
+  state = {
+    name: '',
+    message: '',
+    email: '',
+    sent: false,
+    buttonText: 'Send Message'
+  }
+
+  formSubmit = (e) => {
+    e.preventDefault()
+
+    this.setState({
+        buttonText: '...sending'
+    })
+
+    let data = {
+        name: this.state.name,
+        email: this.state.email,
+        message: this.state.message
+    }
+    
+    axios.post('API_URI', data)
+    .then( res => {
+        this.setState({ sent: true }, this.resetForm())
+    })
+    .catch( () => {
+      console.log('Message not sent')
+    })
+  }
+
+  resetForm = () => {
+    this.setState({
+        name: '',
+        message: '',
+        email: '',
+        buttonText: 'Message Sent'
+    })
+  }
+
+  render() {
+    const { classes } = this.props;  
+    return (
+      <Grid container className={classes.root}>
+          <Grid container direction="column" justify="center">
+            <Grid item>
+              <Typography className={classes.headline} variant="h2">
+                KONTAKT
+              </Typography> 
+            </Grid>
+            <Grid item>
+              <Grid container direction="row" justify="center">
+                <Grid item xs={6}>
+                  <MuiThemeProvider theme={theme}>
+                  <TextField
+                    required
+                    id="name"
+                    label="Name"
+                    className={classes.messageName}
+                    value={this.state.name}
+                    onChange={e => this.setState({ name: e.target.value})}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                      classes: {
+                        notchedOutline: classes.notchedOutline,
+                        input: classes.multilineColor
+                      }
+                    }}
+                  />
+                  </MuiThemeProvider>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container direction="row" justify="center">
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    id="email"
+                    label="Email"
+                    className={classes.messageEmail}
+                    value={this.state.email}
+                    onChange={e => this.setState({ email: e.target.value})}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                      classes: {
+                        notchedOutline: classes.notchedOutline
+                      }
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container direction="row" justify="center">
+                <Grid item xs={6}>  
+                  <TextField
+                    id="message"
+                    label="Message"
+                    multiline
+                    rows="8"
+                    value={this.state.message}
+                    onChange={e => this.setState({ message: e.target.value})}
+                    className={classes.messageInput}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                      classes: {
+                        notchedOutline: classes.notchedOutline
+                      }
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container direction="row" justify="center">
+                <Grid item xs={6}>
+                  <Button type="submit" className={classes.sendButton} onSubmit={ (e) => this.formSubmit(e)}>{ this.state.buttonText }</Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+      </Grid>
+    );
+  }
+}
+
+Kontakt.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Kontakt);
