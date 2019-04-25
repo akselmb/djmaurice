@@ -59,7 +59,11 @@ function Header(props){
     const { classes } = props;  
     return (
       <Grid container className={classes.root} >
+<<<<<<< HEAD
         <Grid container justify="center" alignItems="center" direction="column" wrap='nowrap'>
+=======
+        <Grid spacing={32} container justify="center" alignItems="center" direction="column" wrap='nowrap'>
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
           <Grid key={0} item xs={8} lg={8} />
           <Grid key={1} item xs={8} lg={10}>
             <Typography variant="h1" className={classes.headline}>
@@ -72,11 +76,17 @@ function Header(props){
             </Typography>
           </Grid>
           <Grid key={3} item xs={8} lg={8}>
+<<<<<<< HEAD
             <IconButton className={classes.ArrowButton} > 
               <Typography  variant="h6" className={classes.text}>
                 TRYKK HER
               </Typography>
             </IconButton>
+=======
+            <Typography  variant="h6" className={classes.text}>
+              TRYKK HER
+            </Typography>
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
             <IconButton className={classes.ArrowButton} > 
               <KeyboardArrowDown fontSize="large"/>
             </IconButton>

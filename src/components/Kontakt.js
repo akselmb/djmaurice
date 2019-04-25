@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -12,11 +13,30 @@ import axios from 'axios';
 const styles = theme => ({
   root: {
   	backgroundColor: "black",
+=======
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+import Grey from '@material-ui/core/colors/grey';
+import axios from 'axios';
+
+const grey = Grey[400];
+
+const styles = theme => ({
+  root: {
+  	backgroundColor: grey,
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
     flexGrow: 1,
     padding: 0,
     height: "100%",
     position: "relative",
+<<<<<<< HEAD
     color: "white"
+=======
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
   },
   text: {
     textAlign: "center",
@@ -33,7 +53,11 @@ const styles = theme => ({
     color: 'white',
   },
   messageName: {
+<<<<<<< HEAD
     textColor: "white"
+=======
+
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
   },
   messageEmail: {
 
@@ -41,6 +65,7 @@ const styles = theme => ({
   messageInput: {
 
   },
+<<<<<<< HEAD
   sendButton: {
     color: "black",
     background: "white",
@@ -65,6 +90,8 @@ const theme = createMuiTheme({
     secondary: red
   },
   typography: { useNextVariants: true },
+=======
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
 });
 
 class Kontakt extends React.Component {
@@ -111,13 +138,18 @@ class Kontakt extends React.Component {
     const { classes } = this.props;  
     return (
       <Grid container className={classes.root}>
+<<<<<<< HEAD
           <Grid container direction="column" justify="center">
+=======
+          <Grid spacing={32} container direction="column" justify="center" alignItems="center">
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
             <Grid item>
               <Typography className={classes.headline} variant="h2">
                 KONTAKT
               </Typography> 
             </Grid>
             <Grid item>
+<<<<<<< HEAD
               <Grid container direction="row" justify="center">
                 <Grid item xs={6}>
                   <MuiThemeProvider theme={theme}>
@@ -193,6 +225,47 @@ class Kontakt extends React.Component {
                   <Button type="submit" className={classes.sendButton} onSubmit={ (e) => this.formSubmit(e)}>{ this.state.buttonText }</Button>
                 </Grid>
               </Grid>
+=======
+              <TextField
+                required
+                id="name"
+                label="Name"
+                className={classes.messageName}
+                value={this.state.name}
+                onChange={e => this.setState({ name: e.target.value})}
+                margin="normal"
+                fullWidth
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                required
+                id="email"
+                label="Email"
+                className={classes.messageEmail}
+                value={this.state.email}
+                onChange={e => this.setState({ email: e.target.value})}
+                margin="normal"
+                fullWidth
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="message"
+                label="Message"
+                multiline
+                rows="8"
+                value={this.state.message}
+                onChange={e => this.setState({ message: e.target.value})}
+                className={classes.messageInput}
+                margin="normal"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <Grid item>
+              <Button type="submit" className="sendButton" onSubmit={ (e) => this.formSubmit(e)}>{ this.state.buttonText }</Button>
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
             </Grid>
           </Grid>
       </Grid>

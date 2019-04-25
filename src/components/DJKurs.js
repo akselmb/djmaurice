@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+<<<<<<< HEAD
 import Image from './images/background3.jpg';
 
 const styles = theme => ({
@@ -12,6 +13,12 @@ const styles = theme => ({
     backgroundPosition: "center", /* Center the image */
     backgroundRepeat: "no-repeat", /* Do not repeat the image */
     backgroundSize: "cover", /* Resize the background image to cover the entire container */
+=======
+
+const styles = theme => ({
+  root: {
+  	backgroundColor: 'black',
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
     flexGrow: 1,
     padding: 0,
     height: "100%",
@@ -27,6 +34,7 @@ const styles = theme => ({
     background: "transparent",
     boxShadow: 'none',
     color: 'white',
+<<<<<<< HEAD
   },
   background: {
     position: "absolute",
@@ -39,6 +47,9 @@ const styles = theme => ({
   grid: {
     zIndex: 2
   },
+=======
+  }
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
 });
 
 function new_script(src) {
@@ -74,8 +85,12 @@ class DJKurs extends React.Component {
     const { classes } = this.props; 
     return (
       <Grid container className={classes.root}>
+<<<<<<< HEAD
         <div className={classes.background}></div>
         <Grid container justify="space-evenly" direction="column" className={classes.grid}>
+=======
+        <Grid container justify="space-evenly" direction="column">
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
           <Grid item>
             <Typography className={classes.headline} variant="h2">
               DJ-KURS
@@ -84,10 +99,26 @@ class DJKurs extends React.Component {
           <Grid item >
             <Grid container direction="row" justify="center">
               <Grid item xs={4}>
+<<<<<<< HEAD
                 
               </Grid>
               <Grid item xs={4}>
               
+=======
+                <Typography className={classes.text} variant="body1">
+                  Har du lyst til å begynne å jobbe som profesjonell DJ? 
+                  Da er dette kurset for deg!
+
+                  
+                </Typography> 
+              </Grid>
+              <Grid item xs={4}>
+                <Paper>
+                  I dette kurset vil vi gå gjennom alt du trenger for å begynne som DJ. Vi kommer blant annet til å gå igjennom:
+                  hva en DJ gjør, håndtering av utstyr, mikse-teknikker, analyse av publikum, hvordan få spillejobber samt noen tips og triks. 
+                  Du trenger ikke å ta med deg noe. NB: Kun seks plasser!
+                </Paper>
+>>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
               </Grid>
             </Grid>
           </Grid>
