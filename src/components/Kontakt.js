@@ -1,42 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import red from '@material-ui/core/colors/red';
-import axios from 'axios';
-
-const styles = theme => ({
-  root: {
-  	backgroundColor: "black",
-=======
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Icon from '@material-ui/core/Icon';
+import Pink from '@material-ui/core/colors/pink';
+import { ReactComponent as Facebook} from './svg/facebook.svg';
+import { ReactComponent as Soundcloud} from './svg/soundcloud.svg';
 
-import Grey from '@material-ui/core/colors/grey';
-import axios from 'axios';
-
-const grey = Grey[400];
+const red = Pink['A400'];
 
 const styles = theme => ({
   root: {
-  	backgroundColor: grey,
->>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
+  	backgroundColor: "black",
     flexGrow: 1,
     padding: 0,
     height: "100%",
     position: "relative",
-<<<<<<< HEAD
     color: "white"
-=======
->>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
   },
   text: {
     textAlign: "center",
@@ -52,84 +35,123 @@ const styles = theme => ({
     boxShadow: 'none',
     color: 'white',
   },
-  messageName: {
-<<<<<<< HEAD
-    textColor: "white"
-=======
-
->>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
+  grow: {
+    flexGrow: 1,
   },
-  messageEmail: {
+  messageName: {
+    textColor: "white"
+  },
+  senderEmail: {
 
   },
   messageInput: {
 
   },
-<<<<<<< HEAD
+  label: {
+    color: "white",
+    '&$focused': {
+      color: "white"
+    }
+  },
+  focused: {},
   sendButton: {
     color: "black",
     background: "white",
-    marginLeft: "auto",
-    display: "block",
-    ':hover': {
-      background: "white"
-    }
+    float: "right"
   },
-  multilineColor: {
+  rightIcon: {
+    marginLeft: theme.spacing.unit, 
+  },
+  inputColor: {
     color:'white'
   },
   notchedOutline: {
     borderWidth: "1px",
-    borderColor: "#f44336 !important"
-  }
-});
-
-const theme = createMuiTheme({
-  palette: {
-    primary: red,
-    secondary: red
+    borderColor: `${red} !important`
   },
-  typography: { useNextVariants: true },
-=======
->>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
+  icon: {
+    fill: "white",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "block",
+    height: "auto",
+    width: "auto",
+  },
+  iconBar: {
+    marginTop: "5%",
+  },
+  footer: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    left: 0,
+    color: "white",
+    textAlign: "center",
+    padding: "1rem",
+  }
 });
 
 class Kontakt extends React.Component {
   state = {
     name: '',
     message: '',
-    email: '',
+    senderEmail: '',
+    submit: false,
     sent: false,
-    buttonText: 'Send Message'
+    buttonText: 'send'
   }
 
-  formSubmit = (e) => {
-    e.preventDefault()
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
 
     this.setState({
         buttonText: '...sending'
-    })
+    });
 
-    let data = {
-        name: this.state.name,
-        email: this.state.email,
-        message: this.state.message
-    }
-    
-    axios.post('API_URI', data)
-    .then( res => {
-        this.setState({ sent: true }, this.resetForm())
-    })
-    .catch( () => {
-      console.log('Message not sent')
-    })
+    const {
+      REACT_APP_EMAILJS_RECEIVER: receiverEmail,
+      REACT_APP_EMAILJS_TEMPLATEID: template
+    } = this.props.env;
+
+    this.sendFeedback(
+      template,
+      this.state.name,
+      this.state.senderEmail,
+      receiverEmail,
+      this.state.message);
+
+    this.setState({
+      submit: true,
+    });
+  }
+
+  sendFeedback (template, name, senderEmail, receiverEmail, message) {
+    window.emailjs.send(
+      'mailgun',
+      template,
+      {
+        name,
+        senderEmail,
+        receiverEmail,
+        message
+      })
+      .then(res => {
+        this.setState({ sent: true });
+        this.resetForm();
+      })
+      // Handle errors here however you like, or use a React error boundary
+      .catch(err => console.error('Failed to send message. Error: ', err));
   }
 
   resetForm = () => {
     this.setState({
         name: '',
         message: '',
-        email: '',
+        senderEmail: '',
         buttonText: 'Message Sent'
     })
   }
@@ -138,39 +160,37 @@ class Kontakt extends React.Component {
     const { classes } = this.props;  
     return (
       <Grid container className={classes.root}>
-<<<<<<< HEAD
-          <Grid container direction="column" justify="center">
-=======
-          <Grid spacing={32} container direction="column" justify="center" alignItems="center">
->>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
+        <Grid container direction="column" justify="center">
+          <form id="mailForm" onSubmit={this.handleSubmit}>    
             <Grid item>
-              <Typography className={classes.headline} variant="h2">
-                KONTAKT
-              </Typography> 
-            </Grid>
-            <Grid item>
-<<<<<<< HEAD
               <Grid container direction="row" justify="center">
                 <Grid item xs={6}>
-                  <MuiThemeProvider theme={theme}>
                   <TextField
+                    autoComplete={"email"}
                     required
                     id="name"
-                    label="Name"
-                    className={classes.messageName}
+                    label="Ditt navn"
+                    classes={{
+                      root: classes.messageName,
+                    }}
                     value={this.state.name}
-                    onChange={e => this.setState({ name: e.target.value})}
+                    onChange={ this.handleChange('name') }
                     margin="normal"
                     variant="outlined"
                     fullWidth
                     InputProps={{
                       classes: {
                         notchedOutline: classes.notchedOutline,
-                        input: classes.multilineColor
+                        input: classes.inputColor,
+                      }
+                    }}
+                    InputLabelProps ={{
+                      classes: {
+                        root: classes.label,
+                        focused: classes.focused   
                       }
                     }}
                   />
-                  </MuiThemeProvider>
                 </Grid>
               </Grid>
             </Grid>
@@ -178,18 +198,27 @@ class Kontakt extends React.Component {
               <Grid container direction="row" justify="center">
                 <Grid item xs={6}>
                   <TextField
+                    autoComplete={"email"}
                     required
-                    id="email"
-                    label="Email"
-                    className={classes.messageEmail}
-                    value={this.state.email}
-                    onChange={e => this.setState({ email: e.target.value})}
+                    id="senderEmail"
+                    label="Din epostadresse"
+                    className={classes.senderEmail}
+                    value={this.state.senderEmail}
+                    onChange={ this.handleChange('senderEmail') }
                     margin="normal"
                     variant="outlined"
                     fullWidth
                     InputProps={{
                       classes: {
-                        notchedOutline: classes.notchedOutline
+                        notchedOutline: classes.notchedOutline,
+                        input: classes.inputColor,
+                      }
+
+                    }}
+                    InputLabelProps ={{
+                      classes: {
+                        root: classes.label,
+                        focused: classes.focused      
                       }
                     }}
                   />
@@ -201,18 +230,25 @@ class Kontakt extends React.Component {
                 <Grid item xs={6}>  
                   <TextField
                     id="message"
-                    label="Message"
+                    label="Melding"
                     multiline
-                    rows="8"
+                    rows="12"
                     value={this.state.message}
-                    onChange={e => this.setState({ message: e.target.value})}
+                    onChange={ this.handleChange('message') }
                     className={classes.messageInput}
                     margin="normal"
                     variant="outlined"
                     fullWidth
                     InputProps={{
                       classes: {
-                        notchedOutline: classes.notchedOutline
+                        notchedOutline: classes.notchedOutline,
+                        input: classes.inputColor,
+                      }
+                    }}
+                    InputLabelProps ={{
+                      classes: {
+                        root: classes.label,
+                        focused: classes.focused   
                       }
                     }}
                   />
@@ -221,53 +257,23 @@ class Kontakt extends React.Component {
             </Grid>
             <Grid item>
               <Grid container direction="row" justify="center">
-                <Grid item xs={6}>
-                  <Button type="submit" className={classes.sendButton} onSubmit={ (e) => this.formSubmit(e)}>{ this.state.buttonText }</Button>
+                <Grid item xs={6} >
+                  <Button variant="contained" type="submit" form="mailForm"  color="secondary" className={classes.sendButton} onSubmit={ e => this.handleSubmit(e) }>
+                    { this.state.buttonText }
+                    <Icon className={classes.rightIcon} size="small">send</Icon>
+                  </Button>
                 </Grid>
               </Grid>
-=======
-              <TextField
-                required
-                id="name"
-                label="Name"
-                className={classes.messageName}
-                value={this.state.name}
-                onChange={e => this.setState({ name: e.target.value})}
-                margin="normal"
-                fullWidth
-              />
             </Grid>
             <Grid item>
-              <TextField
-                required
-                id="email"
-                label="Email"
-                className={classes.messageEmail}
-                value={this.state.email}
-                onChange={e => this.setState({ email: e.target.value})}
-                margin="normal"
-                fullWidth
-              />
+              <Grid container direction="row" justify="center">
+                <Grid item xs={6} >
+                  <Typography className={classes.footer}>Copyright Máurice 2019</Typography>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                id="message"
-                label="Message"
-                multiline
-                rows="8"
-                value={this.state.message}
-                onChange={e => this.setState({ message: e.target.value})}
-                className={classes.messageInput}
-                margin="normal"
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
-            <Grid item>
-              <Button type="submit" className="sendButton" onSubmit={ (e) => this.formSubmit(e)}>{ this.state.buttonText }</Button>
->>>>>>> 335cfa7da92069efd9b9053aabbe7061f4392148
-            </Grid>
-          </Grid>
+          </form>
+        </Grid>
       </Grid>
     );
   }
@@ -275,6 +281,7 @@ class Kontakt extends React.Component {
 
 Kontakt.propTypes = {
   classes: PropTypes.object.isRequired,
+  env: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Kontakt);
