@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Pink from '@material-ui/core/colors/pink';
+import { ReactComponent as Facebook} from './svg/facebook.svg';
+import { ReactComponent as Soundcloud} from './svg/soundcloud.svg';
 
 const red = Pink['A400'];
 
@@ -66,6 +68,26 @@ const styles = theme => ({
   notchedOutline: {
     borderWidth: "1px",
     borderColor: `${red} !important`
+  },
+  icon: {
+    fill: "white",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "block",
+    height: "auto",
+    width: "auto",
+  },
+  iconBar: {
+    marginTop: "5%",
+  },
+  footer: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    left: 0,
+    color: "white",
+    textAlign: "center",
+    padding: "1rem",
   }
 });
 
@@ -139,8 +161,7 @@ class Kontakt extends React.Component {
     return (
       <Grid container className={classes.root}>
         <Grid container direction="column" justify="center">
-          <form id="mailForm" onSubmit={this.handleSubmit}>
-            
+          <form id="mailForm" onSubmit={this.handleSubmit}>    
             <Grid item>
               <Grid container direction="row" justify="center">
                 <Grid item xs={6}>
@@ -148,7 +169,7 @@ class Kontakt extends React.Component {
                     autoComplete={"email"}
                     required
                     id="name"
-                    label="Navn"
+                    label="Ditt navn"
                     classes={{
                       root: classes.messageName,
                     }}
@@ -180,7 +201,7 @@ class Kontakt extends React.Component {
                     autoComplete={"email"}
                     required
                     id="senderEmail"
-                    label="Email"
+                    label="Din epostadresse"
                     className={classes.senderEmail}
                     value={this.state.senderEmail}
                     onChange={ this.handleChange('senderEmail') }
@@ -241,6 +262,13 @@ class Kontakt extends React.Component {
                     { this.state.buttonText }
                     <Icon className={classes.rightIcon} size="small">send</Icon>
                   </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container direction="row" justify="center">
+                <Grid item xs={6} >
+                  <Typography className={classes.footer}>Copyright Máurice 2019</Typography>
                 </Grid>
               </Grid>
             </Grid>

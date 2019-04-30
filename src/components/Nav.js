@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import grey from '@material-ui/core/colors/grey';
+import { ReactComponent as Facebook} from './svg/facebook.svg';
+import { ReactComponent as Soundcloud} from './svg/soundcloud.svg';
 
 const white = grey[50];
 
@@ -42,6 +44,13 @@ const styles = theme => ({
     height: "50%",
     width: "50%",
   },
+  icon: {
+    fill: "white",
+    marginLeft: "20px",
+    display: "block",
+    height: "auto",
+    width: "auto",
+  },
 });
 
 class Nav extends Component {
@@ -63,6 +72,12 @@ class Nav extends Component {
             <Typography variant="h6" color="inherit">
               MÁURICE
             </Typography>
+            <a href="https://www.facebook.com/mauriceofficielle" target="_blank">
+              <Facebook className={classes.icon} />
+            </a>
+            <a href="https://soundcloud.com/mauriceofficielle" target="_blank">
+              <Soundcloud className={classes.icon} />
+            </a>
             <div className={classes.grow}></div>
             <IconButton aria-label="Menu" className={classes.menuIcon}>
               <MenuIcon />
