@@ -7,7 +7,6 @@ import Image from './images/background2.jpg';
 import Grey from '@material-ui/core/colors/grey';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 
 const white = Grey[50];
 
@@ -27,11 +26,17 @@ const styles = theme => ({
   	background: "transparent",
   	boxShadow: 'none',
   	color: 'white',
-  	[theme.breakpoints.down('sm')]: {
-      fontSize: 18,
+    [theme.breakpoints.up('xs')]: {
+      fontSize: 48,
+      lineHeight: 1.5
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.up('sm')]: {
       fontSize: 72,
+      lineHeight: 1
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: 95,
+      lineHeight: 1
     },
   },
   text: {
@@ -39,6 +44,19 @@ const styles = theme => ({
     background: "transparent",
     boxShadow: 'none',
     color: 'white',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 14,
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 18,
+    },
+  },  
+  underText: {
+    textAlign: "center",
+    background: "transparent",
+    boxShadow: 'none',
+    color: 'white',
+    marginTop: "10%",
     [theme.breakpoints.down('sm')]: {
       fontSize: 14,
     },
@@ -67,7 +85,7 @@ function Header(props){
             </Typography>
           </Grid>
           <Grid key={2} item xs={8} lg={8}>
-            <Typography  variant="h6" className={classes.text}>
+            <Typography  variant="h6" className={classes.underText}>
               Book din kursplass i dag!
             </Typography>
           </Grid>

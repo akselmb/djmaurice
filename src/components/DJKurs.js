@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Image from './images/background3.jpg';
 
@@ -56,7 +55,7 @@ function new_script(src) {
 };
 
 // Promise Interface can ensure load the script only once.
-const my_script = new_script("//d16s6o6uu491xt.cloudfront.net/sales-3/loader.embed.production.js");
+new_script("//d16s6o6uu491xt.cloudfront.net/sales-3/loader.embed.production.js");
 
 class DJKurs extends React.Component {  
   render() {
@@ -76,17 +75,6 @@ class DJKurs extends React.Component {
       <Grid container className={classes.root}>
         <div className={classes.background}></div>
         <Grid container justify="space-evenly" direction="column" className={classes.grid}>
-          <Grid item>
-            <Typography className={classes.headline} variant="h2">
-              DJ-KURS
-            </Typography> 
-          </Grid>
-          <Grid item >
-            <Grid container direction="row" justify="center">
-              <Grid item xs={4}>
-              </Grid>
-            </Grid>
-          </Grid>
           <Grid item>
             <Grid container direction="row" justify="center">
               <Grid item xs={8}>

@@ -63,7 +63,7 @@ class Nav extends Component {
             <Typography variant="h6" color="inherit">
               MÁURICE
             </Typography>
-            <div className={classes.grow} />
+            <div className={classes.grow}></div>
             <IconButton aria-label="Menu" className={classes.menuIcon}>
               <MenuIcon />
             </IconButton>

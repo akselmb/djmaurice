@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Image from './images/maurice_portrait.jpg';
-import Grey from '@material-ui/core/colors/grey';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-
-const grey = Grey[600];
 
 const styles = theme => ({
   root: {
