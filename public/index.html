@@ -14,7 +14,14 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        emailjs.init("%REACT_APP_EMAILJS_USERID%");
+      })();
+    </script>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600" rel="stylesheet"> -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.

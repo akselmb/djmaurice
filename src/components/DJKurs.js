@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Image from './images/background3.jpg';
 
 const styles = theme => ({
   root: {
-  	backgroundColor: 'black',
+  	backgroundImage: `url(${Image})`,
+    backgroundPosition: "center", /* Center the image */
+    backgroundRepeat: "no-repeat", /* Do not repeat the image */
+    backgroundSize: "cover", /* Resize the background image to cover the entire container */
     flexGrow: 1,
     padding: 0,
     height: "100%",
@@ -23,7 +26,18 @@ const styles = theme => ({
     background: "transparent",
     boxShadow: 'none',
     color: 'white',
-  }
+  },
+  background: {
+    position: "absolute",
+    backgroundColor: "black",
+    opacity: 0.5,
+    height: "100%",
+    width: "100%",
+    zIndex: 1,
+  },
+  grid: {
+    zIndex: 2
+  },
 });
 
 function new_script(src) {
@@ -41,7 +55,7 @@ function new_script(src) {
 };
 
 // Promise Interface can ensure load the script only once.
-const my_script = new_script("//d16s6o6uu491xt.cloudfront.net/sales-3/loader.embed.production.js");
+new_script("//d16s6o6uu491xt.cloudfront.net/sales-3/loader.embed.production.js");
 
 class DJKurs extends React.Component {  
   render() {
@@ -59,31 +73,8 @@ class DJKurs extends React.Component {
     const { classes } = this.props; 
     return (
       <Grid container className={classes.root}>
-        <Grid container justify="space-evenly" direction="column">
-          <Grid item>
-            <Typography className={classes.headline} variant="h2">
-              DJ-KURS
-            </Typography> 
-          </Grid>
-          <Grid item >
-            <Grid container direction="row" justify="center">
-              <Grid item xs={4}>
-                <Typography className={classes.text} variant="body1">
-                  Har du lyst til å begynne å jobbe som profesjonell DJ? 
-                  Da er dette kurset for deg!
-
-                  
-                </Typography> 
-              </Grid>
-              <Grid item xs={4}>
-                <Paper>
-                  I dette kurset vil vi gå gjennom alt du trenger for å begynne som DJ. Vi kommer blant annet til å gå igjennom:
-                  hva en DJ gjør, håndtering av utstyr, mikse-teknikker, analyse av publikum, hvordan få spillejobber samt noen tips og triks. 
-                  Du trenger ikke å ta med deg noe. NB: Kun seks plasser!
-                </Paper>
-              </Grid>
-            </Grid>
-          </Grid>
+        <div className={classes.background}></div>
+        <Grid container justify="space-evenly" direction="column" className={classes.grid}>
           <Grid item>
             <Grid container direction="row" justify="center">
               <Grid item xs={8}>

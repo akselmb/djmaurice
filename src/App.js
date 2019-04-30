@@ -16,6 +16,7 @@ const styles = theme => ({
 });
 
 class App extends Component {
+
   render() {
   	const { classes } = this.props;	 
     return (
@@ -24,7 +25,7 @@ class App extends Component {
         <Header />
         <Om />
         <DJKurs />
-        <Kontakt />
+        <Kontakt env={this.props.env} />
       </div>
     )
   }
@@ -32,6 +33,7 @@ class App extends Component {
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
+  env: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(App);
